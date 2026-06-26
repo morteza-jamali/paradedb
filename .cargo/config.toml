@@ -1,3 +1,7 @@
 # on macOS, PostgreSQL symbols won't be available until runtime
 [target.'cfg(target_os="macos")']
 rustflags = ["-Clink-arg=-Wl,-undefined,dynamic_lookup"]
+
+# Broaden amd64 Linux binary compatibility: x86-64-v2 does not require AVX/AVX2.
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "target-cpu=x86-64-v2"]
